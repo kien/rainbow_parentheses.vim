@@ -4,25 +4,38 @@
 "               2011-10-12: Use less code.  Leave room for deeper levels.
 "==============================================================================
 
-let s:max = 16
+if !exists('g:rbpt_colorpairs')
+	let s:colorpairs = [
+				\ ['brown',       'OrangeRed1'],
+				\ ['Darkblue',    'LightGoldenRod1'],
+				\ ['darkgray',    'DeepSkyBlue1'],
+				\ ['darkgreen',   'HotPink1'],
+				\ ['darkcyan',    'chartreuse1'],
+				\ ['darkred',     'OrangeRed1'],
+				\ ['darkmagenta', 'LightGoldenRod1'],
+				\ ['brown',       'DeepSkyBlue1'],
+				\ ['gray',        'HotPink1'],
+				\ ['black',       'chartreuse1'],
+				\ ['darkmagenta', 'OrangeRed1'],
+				\ ['Darkblue',    'LightGoldenRod1'],
+				\ ['darkgreen',   'DeepSkyBlue1'],
+				\ ['darkcyan',    'HotPink1'],
+				\ ['darkred',     'chartreuse1'],
+				\ ['red',         'Yellow'],
+				\ ]
+else
+	let s:colorpairs = g:rbpt_colorpairs
+	unl g:rbpt_colorpairs
+endif
+
+let s:max = len(s:colorpairs)
 
 func! rainbow_parentheses#activate()
-	hi default level1c   ctermfg=brown        guifg=OrangeRed1
-	hi default level2c   ctermfg=Darkblue     guifg=LightGoldenRod1
-	hi default level3c   ctermfg=darkgray     guifg=DeepSkyBlue1
-	hi default level4c   ctermfg=darkgreen    guifg=HotPink1
-	hi default level5c   ctermfg=darkcyan     guifg=chartreuse1
-	hi default level6c   ctermfg=darkred      guifg=OrangeRed1
-	hi default level7c   ctermfg=darkmagenta  guifg=LightGoldenRod1
-	hi default level8c   ctermfg=brown        guifg=DeepSkyBlue1
-	hi default level9c   ctermfg=gray         guifg=HotPink1
-	hi default level10c  ctermfg=black        guifg=chartreuse1
-	hi default level11c  ctermfg=darkmagenta  guifg=OrangeRed1
-	hi default level12c  ctermfg=Darkblue     guifg=LightGoldenRod1
-	hi default level13c  ctermfg=darkgreen    guifg=DeepSkyBlue1
-	hi default level14c  ctermfg=darkcyan     guifg=HotPink1
-	hi default level15c  ctermfg=darkred      guifg=chartreuse1
-	hi default level16c  ctermfg=red          guifg=Yellow
+	let id = 1
+	for [ctermbg, guibg] in s:colorpairs
+		exe printf('hi default level%dc ctermfg=%s guifg=%s', id, ctermbg, guibg)
+		let id += 1
+	endfor
 	let s:active = 1
 endfunc
 

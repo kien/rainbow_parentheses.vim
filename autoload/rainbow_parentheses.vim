@@ -6,29 +6,42 @@
 
 if !exists('g:rbpt_colorpairs')
 	let s:colorpairs = [
-				\ ['brown',       'OrangeRed1'],
-				\ ['Darkblue',    'LightGoldenRod1'],
-				\ ['darkgray',    'DeepSkyBlue1'],
-				\ ['darkgreen',   'HotPink1'],
-				\ ['darkcyan',    'chartreuse1'],
-				\ ['darkred',     'OrangeRed1'],
-				\ ['darkmagenta', 'LightGoldenRod1'],
-				\ ['brown',       'DeepSkyBlue1'],
-				\ ['gray',        'HotPink1'],
-				\ ['black',       'chartreuse1'],
-				\ ['darkmagenta', 'OrangeRed1'],
-				\ ['Darkblue',    'LightGoldenRod1'],
-				\ ['darkgreen',   'DeepSkyBlue1'],
-				\ ['darkcyan',    'HotPink1'],
-				\ ['darkred',     'chartreuse1'],
-				\ ['red',         'Yellow'],
+				\ ['brown',       'RoyalBlue3'],
+				\ ['Darkblue',    'SeaGreen3'],
+				\ ['darkgray',    'DarkOrchid3'],
+				\ ['darkgreen',   'firebrick3'],
+				\ ['darkcyan',    'RoyalBlue3'],
+				\ ['darkred',     'SeaGreen3'],
+				\ ['darkmagenta', 'DarkOrchid3'],
+				\ ['brown',       'firebrick3'],
+				\ ['gray',        'RoyalBlue3'],
+				\ ['black',       'SeaGreen3'],
+				\ ['darkmagenta', 'DarkOrchid3'],
+				\ ['Darkblue',    'firebrick3'],
+				\ ['darkgreen',   'RoyalBlue3'],
+				\ ['darkcyan',    'SeaGreen3'],
+				\ ['darkred',     'DarkOrchid3'],
+				\ ['red',         'firebrick3'],
 				\ ]
 else
 	let s:colorpairs = g:rbpt_colorpairs
 	unl g:rbpt_colorpairs
 endif
 
-let s:max = len(s:colorpairs)
+if !exists('g:rbpt_max')
+	let s:max = len(s:colorpairs)
+else
+	let s:max = g:rbpt_max
+	unl g:rbpt_max
+endif
+
+func! s:extend()
+	if s:max > len(s:colorpairs)
+		cal extend(s:colorpairs, s:colorpairs)
+		cal s:extend()
+	endif
+endfunc
+cal s:extend()
 
 func! rainbow_parentheses#activate()
 	let id = 1

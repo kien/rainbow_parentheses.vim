@@ -39,6 +39,8 @@ func! s:extend()
 	if s:max > len(s:colorpairs)
 		cal extend(s:colorpairs, s:colorpairs)
 		cal s:extend()
+	elseif s:max < len(s:colorpairs)
+		cal remove(s:colorpairs, s:max, -1)
 	endif
 endfunc
 cal s:extend()

@@ -65,7 +65,7 @@ func! rainbow_parentheses#toggle()
 	if !exists('s:active')
 		cal rainbow_parentheses#load('(',')')
 	endif
-	if s:active != 0
+	if exists('s:active') && s:active
 		cal rainbow_parentheses#clear()
 	else
 		cal rainbow_parentheses#activate()
@@ -92,7 +92,6 @@ func! rainbow_parentheses#load(br1, br2)
 		exe printf(cmd, 'level'.each, 'level'.each.'c', br1, br2, join(alllvls, ','))
 		cal remove(alllvls, 0)
 	endfor
-	let s:active = 0
 endfunc
 
 " vim:ts=2:sw=2:sts=2

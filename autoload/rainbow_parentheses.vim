@@ -55,7 +55,7 @@ func! rainbow_parentheses#activate()
 endfunc
 
 func! rainbow_parentheses#clear()
-	for each in range(s:max)
+	for each in range(1, s:max)
 		exe 'hi clear level'.each.'c'
 	endfor
 	let s:active = 0

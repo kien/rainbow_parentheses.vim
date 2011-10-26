@@ -82,17 +82,19 @@ endfunc
 cal s:cluster()
 
 let s:types = [['(',')'],['\[','\]'],['{','}'],['<','>']]
-let s:loaded = [0,0,0,0]
 
 func! rainbow_parentheses#load(...)
 	let [level, grp, alllvls, type] = ['', '', [], s:types[a:1]]
 	for each in range(1, s:max)
 		cal add(alllvls, 'level'.each)
 	endfor
-	let s:loaded[a:1] = s:loaded[a:1] ? 0 : 1
+	if !exists('b:loaded')
+		let b:loaded = [0,0,0,0]
+	endif
+	let b:loaded[a:1] = b:loaded[a:1] ? 0 : 1
 	for each in range(1, s:max)
-		let region = s:loaded[a:1] ? 'level'.each : 'level'.each.'none'
-		let grp = s:loaded[a:1] ? 'level'.each.'c' : 'Normal'
+		let region = b:loaded[a:1] ? 'level'.each : 'level'.each.'none'
+		let grp = b:loaded[a:1] ? 'level'.each.'c' : 'Normal'
 		let cmd = 'syn region %s matchgroup=%s start=/%s/ end=/%s/ contains=TOP,%s,NoInParens'
 		exe printf(cmd, region, grp, type[0], type[1], join(alllvls, ','))
 		cal remove(alllvls, 0)

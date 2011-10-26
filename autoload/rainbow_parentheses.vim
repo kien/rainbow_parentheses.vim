@@ -47,8 +47,8 @@ cal s:extend()
 
 func! rainbow_parentheses#activate()
 	let id = 1
-	for [ctermbg, guibg] in s:colorpairs
-		exe printf('hi default level%dc ctermfg=%s guifg=%s', id, ctermbg, guibg)
+	for [ctermfg, guifg] in s:colorpairs
+		exe 'hi default level'.id.'c ctermfg='.ctermfg.' guifg='.guifg
 		let id += 1
 	endfor
 	let s:active = 1
@@ -63,7 +63,7 @@ endfunc
 
 func! rainbow_parentheses#toggle()
 	if !exists('s:active')
-		cal rainbow_parentheses#load('(',')')
+		cal rainbow_parentheses#load(0)
 	endif
 	if exists('s:active') && s:active
 		cal rainbow_parentheses#clear()
@@ -81,15 +81,20 @@ func! s:cluster()
 endfunc
 cal s:cluster()
 
-func! rainbow_parentheses#load(br1, br2)
-	let [level, grp, alllvls] = ['', '', []]
-	let [br1, br2] = [escape(a:br1, '['), escape(a:br2, ']')]
+let s:types = [['(',')'],['\[','\]'],['{','}'],['<','>']]
+let s:loaded = [0,0,0,0]
+
+func! rainbow_parentheses#load(...)
+	let [level, grp, alllvls, type] = ['', '', [], s:types[a:1]]
 	for each in range(1, s:max)
 		cal add(alllvls, 'level'.each)
 	endfor
+	let s:loaded[a:1] = s:loaded[a:1] ? 0 : 1
 	for each in range(1, s:max)
+		let region = s:loaded[a:1] ? 'level'.each : 'level'.each.'none'
+		let grp = s:loaded[a:1] ? 'level'.each.'c' : 'Normal'
 		let cmd = 'syn region %s matchgroup=%s start=/%s/ end=/%s/ contains=TOP,%s,NoInParens'
-		exe printf(cmd, 'level'.each, 'level'.each.'c', br1, br2, join(alllvls, ','))
+		exe printf(cmd, region, grp, type[0], type[1], join(alllvls, ','))
 		cal remove(alllvls, 0)
 	endfor
 endfunc

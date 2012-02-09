@@ -72,6 +72,19 @@ func! rainbow_parentheses#toggle()
 	endif
 endfunc
 
+func! rainbow_parentheses#toggleall()
+	if !exists('s:active')
+		cal rainbow_parentheses#load(0)
+    cal rainbow_parentheses#load(1)
+    cal rainbow_parentheses#load(2)
+	endif
+	if exists('s:active') && s:active
+		cal rainbow_parentheses#clear()
+	else
+		cal rainbow_parentheses#activate()
+	endif
+endfunc
+
 func! s:cluster()
 	let levels = ''
 	for each in range(1, s:max)

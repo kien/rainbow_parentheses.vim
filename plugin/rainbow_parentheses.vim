@@ -5,6 +5,7 @@
 "  GetLatestVimScripts: 3772 1 :AutoInstall: rainbow_parentheses.zip
 
 com! RainbowParenthesesToggle       cal rainbow_parentheses#toggle()
+com! RainbowParenthesesToggleAll    cal rainbow_parentheses#toggleall()
 com! RainbowParenthesesLoadRound    cal rainbow_parentheses#load(0)
 com! RainbowParenthesesLoadSquare   cal rainbow_parentheses#load(1)
 com! RainbowParenthesesLoadBraces   cal rainbow_parentheses#load(2)

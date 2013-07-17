@@ -22,7 +22,7 @@ let s:pairs = [
 	\ ['red',         'firebrick3'],
 	\ ]
 let s:pairs = exists('g:rbpt_colorpairs') ? g:rbpt_colorpairs : s:pairs
-let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 16])
+let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 15])
 let s:loadtgl = exists('g:rbpt_loadcmd_toggle') ? g:rbpt_loadcmd_toggle : 0
 let s:types = [['(',')'],['\[','\]'],['{','}'],['<','>']]
 

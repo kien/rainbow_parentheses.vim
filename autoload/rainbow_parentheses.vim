@@ -14,7 +14,6 @@ let s:pairs = [
 	\ ['darkmagenta', 'DarkOrchid3'],
 	\ ['brown',       'firebrick3'],
 	\ ['gray',        'RoyalBlue3'],
-	\ ['black',       'SeaGreen3'],
 	\ ['darkmagenta', 'DarkOrchid3'],
 	\ ['Darkblue',    'firebrick3'],
 	\ ['darkgreen',   'RoyalBlue3'],
@@ -23,7 +22,7 @@ let s:pairs = [
 	\ ['red',         'firebrick3'],
 	\ ]
 let s:pairs = exists('g:rbpt_colorpairs') ? g:rbpt_colorpairs : s:pairs
-let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 16])
+let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 15])
 let s:loadtgl = exists('g:rbpt_loadcmd_toggle') ? g:rbpt_loadcmd_toggle : 0
 let s:types = [['(',')'],['\[','\]'],['{','}'],['<','>']]
 

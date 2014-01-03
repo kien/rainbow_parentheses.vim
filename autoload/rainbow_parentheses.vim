@@ -89,7 +89,7 @@ func! rainbow_parentheses#load(...)
 	for each in range(1, s:max)
 		let region = 'level'. each .(b:loaded[a:1] ? '' : 'none')
 		let grp = b:loaded[a:1] ? 'level'.each.'c' : 'Normal'
-		let cmd = 'sy region %s matchgroup=%s start=/%s/ end=/%s/ contains=TOP,%s,NoInParens'
+		let cmd = 'sy region %s matchgroup=%s start=/%s/ end=/%s/ contains=TOP,%s,NoInParens fold'
 		exe printf(cmd, region, grp, type[0], type[1], join(alllvls, ','))
 		cal remove(alllvls, 0)
 	endfor

@@ -85,7 +85,11 @@ func! rainbow_parentheses#load(...)
 	if !exists('b:loaded')
 		let b:loaded = [0,0,0,0]
 	endif
-	let b:loaded[a:1] = s:loadtgl && b:loaded[a:1] ? 0 : 1
+  if s:loadtgl
+    let b:loaded[a:1] = 1
+  else
+    let b:loaded[a:1] = b:loaded[a:1] ? 0 : 1
+  endif
 	for each in range(1, s:max)
 		let region = 'level'. each .(b:loaded[a:1] ? '' : 'none')
 		let grp = b:loaded[a:1] ? 'level'.each.'c' : 'Normal'

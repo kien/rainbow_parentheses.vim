@@ -31,6 +31,10 @@ let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 ```
 
+```vim
+let g:rbpt_disabled_colors = ['black', 'brown']
+```
+
 ### Commands:
 
 ```vim

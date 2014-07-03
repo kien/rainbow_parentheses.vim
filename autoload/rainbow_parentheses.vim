@@ -23,7 +23,14 @@ let s:pairs = [
 	\ ['red',         'firebrick3'],
 	\ ]
 let s:pairs = exists('g:rbpt_colorpairs') ? g:rbpt_colorpairs : s:pairs
-let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 16])
+if exists('g:rbpt_disabled_colors')
+  let s:color_filter = 'index(g:rbpt_disabled_colors, v:val[0]) < 0'
+  let s:default_max = 16 - len(g:rbpt_disabled_colors)
+  let s:pairs = filter(copy(s:pairs), s:color_filter)
+else
+  let s:default_max = 16
+endif
+let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), s:default_max])
 let s:loadtgl = exists('g:rbpt_loadcmd_toggle') ? g:rbpt_loadcmd_toggle : 0
 let s:types = [['(',')'],['\[','\]'],['{','}'],['<','>']]
 

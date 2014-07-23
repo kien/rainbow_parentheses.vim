@@ -26,6 +26,7 @@ let s:pairs = exists('g:rbpt_colorpairs') ? g:rbpt_colorpairs : s:pairs
 let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 16])
 let s:loadtgl = exists('g:rbpt_loadcmd_toggle') ? g:rbpt_loadcmd_toggle : 0
 let s:types = [['(',')'],['\[','\]'],['{','}'],['<','>']]
+let s:bold = exists('g:bold_parentheses') ? g:bold_parentheses : 1
 
 func! s:extend()
 	if s:max > len(s:pairs)
@@ -39,8 +40,9 @@ cal s:extend()
 
 func! rainbow_parentheses#activate()
 	let [id, s:active] = [1, 1]
+	let bold = s:bold ? ' cterm=bold gui=bold' : ''
 	for [ctermfg, guifg] in s:pairs
-		exe 'hi default level'.id.'c ctermfg='.ctermfg.' guifg='.guifg
+		exe 'hi default level'.id.'c ctermfg='.ctermfg.' guifg='.guifg.bold
 		let id += 1
 	endfor
 endfunc

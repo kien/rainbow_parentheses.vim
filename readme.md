@@ -33,6 +33,10 @@ let g:rbpt_max = 15
 let g:rbpt_loadcmd_toggle = 0
 ```
 
+```vim
+let g:bold_parentheses = 0      " Default on
+```
+
 ### Commands:
 
 ```vim

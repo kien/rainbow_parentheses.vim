@@ -5,20 +5,20 @@
 "==============================================================================
 
 let s:pairs = [
+	\ ['red',         'RoyalBlue3'],
+	\ ['brown',       'SeaGreen3'],
+	\ ['blue',        'DarkOrchid3'],
+	\ ['gray',        'firebrick3'],
+	\ ['green',       'RoyalBlue3'],
+	\ ['magenta',     'SeaGreen3'],
+	\ ['cyan',        'DarkOrchid3'],
+	\ ['darkred',     'firebrick3'],
 	\ ['brown',       'RoyalBlue3'],
-	\ ['Darkblue',    'SeaGreen3'],
-	\ ['darkgray',    'DarkOrchid3'],
-	\ ['darkgreen',   'firebrick3'],
-	\ ['darkcyan',    'RoyalBlue3'],
-	\ ['darkred',     'SeaGreen3'],
-	\ ['darkmagenta', 'DarkOrchid3'],
-	\ ['brown',       'firebrick3'],
-	\ ['gray',        'RoyalBlue3'],
-	\ ['darkmagenta', 'DarkOrchid3'],
-	\ ['Darkblue',    'firebrick3'],
+	\ ['darkblue',    'DarkOrchid3'],
+	\ ['gray',        'firebrick3'],
 	\ ['darkgreen',   'RoyalBlue3'],
-	\ ['darkcyan',    'SeaGreen3'],
-	\ ['darkred',     'DarkOrchid3'],
+	\ ['darkmagenta', 'SeaGreen3'],
+	\ ['darkcyan',    'DarkOrchid3'],
 	\ ['red',         'firebrick3'],
 	\ ]
 let s:pairs = exists('g:rbpt_colorpairs') ? g:rbpt_colorpairs : s:pairs

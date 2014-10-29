@@ -4,7 +4,7 @@
 "               2011-10-12: Use less code.  Leave room for deeper levels.
 "==============================================================================
 
-let s:pairs = [
+let s:rpairs= [
 	\ ['brown',       'RoyalBlue3'],
 	\ ['Darkblue',    'SeaGreen3'],
 	\ ['darkgray',    'DarkOrchid3'],
@@ -22,7 +22,7 @@ let s:pairs = [
 	\ ['darkred',     'DarkOrchid3'],
 	\ ['red',         'firebrick3'],
 	\ ]
-let s:pairs = exists('g:rbpt_colorpairs') ? g:rbpt_colorpairs : s:pairs
+let s:pairs = exists('g:rbpt_colorpairs') ? reverse(g:rbpt_colorpairs) : reverse(s:rpairs)
 let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 16])
 let s:loadtgl = exists('g:rbpt_loadcmd_toggle') ? g:rbpt_loadcmd_toggle : 0
 let s:types = [['(',')'],['\[','\]'],['{','}'],['<','>']]

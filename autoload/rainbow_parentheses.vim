@@ -5,27 +5,21 @@
 "==============================================================================
 
 let s:rpairs= [
-	\ ['brown',       'RoyalBlue3'],
-	\ ['Darkblue',    'SeaGreen3'],
-	\ ['darkgray',    'DarkOrchid3'],
-	\ ['darkgreen',   'firebrick3'],
-	\ ['darkcyan',    'RoyalBlue3'],
-	\ ['darkred',     'SeaGreen3'],
-	\ ['darkmagenta', 'DarkOrchid3'],
-	\ ['brown',       'firebrick3'],
-	\ ['gray',        'RoyalBlue3'],
-	\ ['black',       'SeaGreen3'],
-	\ ['darkmagenta', 'DarkOrchid3'],
-	\ ['Darkblue',    'firebrick3'],
-	\ ['darkgreen',   'RoyalBlue3'],
-	\ ['darkcyan',    'SeaGreen3'],
-	\ ['darkred',     'DarkOrchid3'],
+	\ ['red',         'RoyalBlue3'],
+	\ ['brown',       'SeaGreen3'],
+	\ ['blue',        'DarkOrchid3'],
+	\ ['gray',        'firebrick3'],
+	\ ['green',       'RoyalBlue3'],
+	\ ['magenta',     'SeaGreen3'],
+	\ ['cyan',        'DarkOrchid3'],
+	\ ['darkred',     'firebrick3'],
 	\ ['red',         'firebrick3'],
 	\ ]
 let s:pairs = exists('g:rbpt_colorpairs') ? reverse(g:rbpt_colorpairs) : reverse(s:rpairs)
-let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 16])
+let s:max = exists('g:rbpt_max') ? g:rbpt_max : max([len(s:pairs), 15])
 let s:loadtgl = exists('g:rbpt_loadcmd_toggle') ? g:rbpt_loadcmd_toggle : 0
 let s:types = [['(',')'],['\[','\]'],['{','}'],['<','>']]
+let s:bold = exists('g:bold_parentheses') ? g:bold_parentheses : 1
 
 func! s:extend()
 	if s:max > len(s:pairs)
@@ -39,8 +33,9 @@ cal s:extend()
 
 func! rainbow_parentheses#activate()
 	let [id, s:active] = [1, 1]
+	let bold = s:bold ? ' cterm=bold gui=bold' : ''
 	for [ctermfg, guifg] in s:pairs
-		exe 'hi default level'.id.'c ctermfg='.ctermfg.' guifg='.guifg
+		exe 'hi default level'.id.'c ctermfg='.ctermfg.' guifg='.guifg.bold
 		let id += 1
 	endfor
 endfunc
@@ -89,7 +84,7 @@ func! rainbow_parentheses#load(...)
 	for each in range(1, s:max)
 		let region = 'level'. each .(b:loaded[a:1] ? '' : 'none')
 		let grp = b:loaded[a:1] ? 'level'.each.'c' : 'Normal'
-		let cmd = 'sy region %s matchgroup=%s start=/%s/ end=/%s/ contains=TOP,%s,NoInParens'
+		let cmd = 'sy region %s matchgroup=%s start=/%s/ end=/%s/ contains=TOP,%s,NoInParens fold'
 		exe printf(cmd, region, grp, type[0], type[1], join(alllvls, ','))
 		cal remove(alllvls, 0)
 	endfor

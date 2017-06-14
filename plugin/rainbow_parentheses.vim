@@ -4,6 +4,14 @@
 "==============================================================================
 "  GetLatestVimScripts: 3772 1 :AutoInstall: rainbow_parentheses.zip
 
+" Exit quickly when:
+" - this plugin was already loaded (or disabled)
+" - when 'compatible' is set
+if exists("g:loaded_rainbow_parentheses") || &cp
+  finish
+endif
+let g:loaded_rainbow_parentheses = 1
+
 com! RainbowParenthesesToggle       cal rainbow_parentheses#toggle()
 com! RainbowParenthesesToggleAll    cal rainbow_parentheses#toggleall()
 com! RainbowParenthesesActivate     cal rainbow_parentheses#activate()
